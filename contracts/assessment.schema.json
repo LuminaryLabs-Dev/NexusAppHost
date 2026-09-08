@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "strengths",
+    "weaknesses",
+    "missingInformation",
+    "nextSteps",
+    "evidenceIds"
+  ],
+  "properties": {
+    "strengths": { "$ref": "#/$defs/notes" },
+    "weaknesses": { "$ref": "#/$defs/notes" },
+    "missingInformation": { "$ref": "#/$defs/notes" },
+    "nextSteps": { "$ref": "#/$defs/notes" },
+    "evidenceIds": { "$ref": "#/$defs/notes" }
+  },
+  "$defs": {
+    "notes": {
+      "type": "array",
+      "maxItems": 30,
+      "items": { "type": "string", "maxLength": 2000 }
+    }
+  }
+}

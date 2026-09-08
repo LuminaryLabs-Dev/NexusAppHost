@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Field Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">A NEXUS EXAMPLE · ES MODULE</div>
+      <h1>Field Notes<span>.</span></h1>
+      <p>
+        A small place to capture what matters.<br />Your note stays here when
+        you close the application.
+      </p>
+      <label for="note">Your research note</label
+      ><textarea
+        id="note"
+        maxlength="10000"
+        placeholder="What did you discover?"
+      ></textarea>
+      <div class="actions">
+        <button id="save">Save note</button
+        ><button id="assess" class="secondary">Assess with Codex</button>
+      </div>
+      <p id="status" role="status">Opening saved notes…</p>
+      <section id="assessment" hidden>
+        <h2>Suggested assessment</h2>
+        <p>Review the evidence yourself. This does not approve a lead.</p>
+        <pre id="result"></pre>
+      </section>
+      <div class="footnote">
+        APP DATA · PRIVATE TO THIS SOURCE · NO AUTOMATIC APPROVALS
+      </div>
+    </main>
+    <script src="ui.js"></script>
+  </body>
+</html>

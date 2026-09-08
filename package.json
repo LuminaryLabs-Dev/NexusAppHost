@@ -1,0 +1,70 @@
+{
+  "name": "nexus-app-host",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local desktop host for versioned Luminary application packages",
+  "author": "Luminary Labs",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/main/main.mjs",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "node --test tests/*.test.mjs",
+    "test:desktop": "node scripts/test-desktop.mjs",
+    "format": "prettier --write src scripts tests contracts examples package.json docs README.md CHANGELOG.md AGENTS.md validation/*.md",
+    "format:check": "prettier --check src scripts tests contracts examples package.json docs README.md CHANGELOG.md AGENTS.md validation/*.md",
+    "validate": "node scripts/validate.mjs",
+    "examples": "python3 scripts/build-wheel.py",
+    "preview": "node scripts/preview.mjs",
+    "package": "electron-builder --dir",
+    "package:linux": "electron-builder --linux AppImage",
+    "package:windows": "electron-builder --win nsis",
+    "package:mac": "electron-builder --mac dmg"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "jszip": "3.10.1",
+    "pyodide": "314.0.6"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "26.15.3",
+    "prettier": "3.9.6"
+  },
+  "build": {
+    "appId": "dev.luminary.nexus-app-host",
+    "productName": "Nexus App Host",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**",
+      "contracts/**",
+      "examples/**",
+      "package.json",
+      "LICENSE"
+    ],
+    "asarUnpack": [
+      "node_modules/pyodide/**"
+    ],
+    "linux": {
+      "category": "Development",
+      "target": "AppImage"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

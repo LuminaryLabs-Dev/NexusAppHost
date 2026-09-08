@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.luminary.field-notes",
+  "name": "Field Notes",
+  "version": "1.0.0",
+  "hostApi": 1,
+  "runtime": { "kind": "esm", "entry": "runtime.mjs" },
+  "ui": "index.html",
+  "capabilities": ["storage", "codex.assess"],
+  "dataSchemaVersion": 1
+}

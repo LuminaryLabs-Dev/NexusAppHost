@@ -1,0 +1,71 @@
+{
+  "$id": "https://luminarylabs.dev/nexus/manifest-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "version",
+    "hostApi",
+    "runtime",
+    "ui",
+    "capabilities",
+    "dataSchemaVersion"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9.-]{2,79}$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$",
+      "maxLength": 80
+    },
+    "hostApi": { "const": 1 },
+    "dataSchemaVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000
+    },
+    "ui": { "type": "string", "minLength": 1, "maxLength": 240 },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 2,
+      "items": { "enum": ["storage", "codex.assess"] }
+    },
+    "runtime": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "entry"],
+          "properties": {
+            "kind": { "const": "esm" },
+            "entry": { "type": "string", "minLength": 1, "maxLength": 240 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "entry", "wheels"],
+          "properties": {
+            "kind": { "const": "python-wheel" },
+            "entry": {
+              "type": "string",
+              "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)*:[a-zA-Z_][a-zA-Z0-9_]*$"
+            },
+            "wheels": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "uniqueItems": true,
+              "items": { "type": "string", "maxLength": 240 }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

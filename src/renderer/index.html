@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nexus App Host</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Nexus App Host home"
+        ><span class="mark">N</span><span>NEXUS <b>APP HOST</b></span></a
+      >
+      <div class="top-status">
+        <span class="dot" id="status-dot"></span
+        ><span id="top-status">Workspace ready</span>
+      </div>
+      <button
+        id="corner"
+        class="corner"
+        aria-haspopup="dialog"
+        aria-controls="panel"
+        aria-expanded="false"
+        aria-label="Open application settings"
+      >
+        <span class="corner-icon">⌘</span><span>Applications</span
+        ><span class="key">⌘ K</span>
+      </button>
+      <div class="corner-hint" role="tooltip">
+        Load an app. Keep your workspace.
+      </div>
+    </header>
+    <main id="workspace">
+      <section id="welcome" class="welcome">
+        <div class="eyebrow">
+          <span class="line"></span> YOUR LOCAL WORKSPACE
+        </div>
+        <h1>A home for<br />what you’re building<span>.</span></h1>
+        <p class="intro">
+          Open an application from GitHub or your computer.<br />Your tools take
+          the stage. Nexus handles the rest.
+        </p>
+        <button id="choose-app" class="primary large">
+          Open an application <span>↗</span>
+        </button>
+        <div class="section-label">
+          START WITH A WORKING EXAMPLE <span>01 / 02</span>
+        </div>
+        <div class="examples">
+          <button id="example-esm" class="example">
+            <span class="example-symbol js">JS</span
+            ><span
+              ><strong>Field Notes</strong
+              ><small>Save a thought. Pick up where you left off.</small></span
+            ><span class="arrow">↗</span
+            ><span class="tag">ES MODULE</span></button
+          ><button id="example-python" class="example">
+            <span class="example-symbol py">Py</span
+            ><span
+              ><strong>Signal Check</strong
+              ><small>Try a structured Python assessment.</small></span
+            ><span class="arrow">↗</span><span class="tag">PYTHON WHEEL</span>
+          </button>
+        </div>
+        <div class="workspace-note">
+          <span class="mini-lock">◇</span> Runs locally <span>·</span> Versioned
+          packages <span>·</span> Your data stays with you
+        </div>
+      </section>
+      <section id="app-surface" hidden>
+        <div class="app-strip">
+          <div>
+            <span class="dot live"></span><strong id="active-name"></strong
+            ><span id="active-version"></span>
+          </div>
+          <span id="task-progress" aria-live="polite"></span>
+        </div>
+        <iframe
+          id="app-frame"
+          title="Hosted application"
+          sandbox="allow-scripts"
+          referrerpolicy="no-referrer"
+          allow=""
+        ></iframe>
+      </section>
+    </main>
+    <footer>
+      <span>LUMINARY LABS</span
+      ><span
+        >Local by design.
+        <span class="footer-version">HOST API 1 · V1.0</span></span
+      >
+    </footer>
+    <div id="backdrop" hidden></div>
+    <aside
+      id="panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="panel-title"
+      hidden
+    >
+      <div class="panel-heading">
+        <div>
+          <div class="eyebrow">WORKSPACE CONTROL</div>
+          <h2 id="panel-title">Your applications</h2>
+        </div>
+        <button
+          id="close-panel"
+          class="icon-button"
+          aria-label="Close application settings"
+        >
+          ×
+        </button>
+      </div>
+      <div class="panel-scroll">
+        <div id="preview-notice" class="notice" hidden>
+          Browser preview · Use the desktop host to load applications.
+        </div>
+        <section id="active-card" class="active-card" hidden>
+          <span class="eyebrow">CURRENTLY RUNNING</span
+          ><strong id="manage-name"></strong>
+          <p id="manage-version"></p>
+          <div class="button-row">
+            <button id="stop" class="secondary">Stop</button
+            ><button id="reload" class="secondary">Inspect reload</button
+            ><button id="change-version" class="text-button">
+              Change version
+            </button>
+          </div>
+        </section>
+        <form id="source-form">
+          <div class="source-tabs" role="group" aria-label="Package source">
+            <button
+              type="button"
+              id="github-tab"
+              class="selected"
+              aria-pressed="true"
+            >
+              GitHub repository</button
+            ><button type="button" id="local-tab" aria-pressed="false">
+              Local folder
+            </button>
+          </div>
+          <div id="github-fields">
+            <label for="repository">Public repository</label
+            ><input
+              id="repository"
+              placeholder="owner / repository"
+              autocomplete="off"
+              spellcheck="false"
+            /><label for="reference"
+              >Branch, tag or commit <span>optional</span></label
+            ><input
+              id="reference"
+              placeholder="Default branch"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <div id="local-fields" hidden>
+            <label for="directory">Application folder</label>
+            <div class="input-row">
+              <input
+                id="directory"
+                placeholder="Select a local folder"
+                readonly
+              /><button type="button" id="browse" class="secondary">
+                Browse
+              </button>
+            </div>
+          </div>
+          <label for="manifest"
+            >Manifest path <span>relative to source</span></label
+          ><input
+            id="manifest"
+            value="nexus-app.json"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <p class="field-note">
+            Nexus inspects the package before running any code.
+          </p>
+          <button id="detect" class="primary" type="submit">
+            Inspect application <span>→</span>
+          </button>
+        </form>
+        <section id="operation" class="operation" hidden aria-live="polite">
+          <div class="operation-title">
+            <span class="spinner"></span
+            ><strong id="operation-label">Inspecting package</strong>
+          </div>
+          <p id="operation-detail"></p>
+          <button id="cancel" class="text-button">Cancel operation</button>
+        </section>
+        <section id="error" class="error" hidden role="alert">
+          <strong id="error-code"></strong>
+          <p id="error-message"></p>
+          <span
+            >Check the source or settings and inspect again. Saved data is
+            preserved.</span
+          >
+        </section>
+        <section id="review" class="review" hidden>
+          <div class="eyebrow">PACKAGE REVIEW</div>
+          <h3 id="review-name"></h3>
+          <div class="package-badges">
+            <span id="review-version" class="badge"></span
+            ><span id="review-runtime" class="badge"></span>
+          </div>
+          <dl>
+            <dt>Source</dt>
+            <dd id="review-origin"></dd>
+            <dt>Revision</dt>
+            <dd id="review-revision" class="mono"></dd>
+            <dt>Application ID</dt>
+            <dd id="review-id" class="mono"></dd>
+            <dt>Data schema</dt>
+            <dd id="review-schema"></dd>
+          </dl>
+          <h4>Requested access</h4>
+          <div id="capabilities"></div>
+          <p id="no-capabilities" class="field-note" hidden>
+            No host capabilities requested.
+          </p>
+          <p class="field-note">
+            Only load packages from authors you trust. Access is revoked when
+            the application stops.
+          </p>
+          <button id="load" class="primary">
+            Approve and load <span>↗</span>
+          </button>
+        </section>
+        <details id="tools">
+          <summary>Host tools & diagnostics</summary>
+          <div class="tools-content">
+            <button id="codex-check" class="secondary">
+              Check Codex connection
+            </button>
+            <p id="codex-status" class="field-note">
+              Optional: uses the installed CLI’s own login.
+            </p>
+            <div class="button-row">
+              <button id="show-logs" class="secondary">View logs</button
+              ><button id="export-logs" class="secondary">Export logs</button>
+            </div>
+            <pre id="log-output" hidden></pre>
+            <button id="clear-cache" class="text-button">
+              Clear inactive package cache
+            </button>
+            <p class="field-note">Saved application data is kept.</p>
+            <button id="delete-data" class="text-button danger" disabled>
+              Delete selected application’s data…
+            </button>
+          </div>
+        </details>
+      </div>
+      <div class="panel-footer">
+        <span class="dot"></span
+        ><span id="panel-status" aria-live="polite">No application loaded</span
+        ><span>API 1</span>
+      </div>
+    </aside>
+    <div id="toast" role="status" hidden></div>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

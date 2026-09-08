@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Check</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">A NEXUS EXAMPLE · PYTHON WHEEL</div>
+      <h1>Signal Check<span>.</span></h1>
+      <p>
+        Find a few useful words in a research note.<br />This offline example
+        uses simple rules, not AI or lead qualification.
+      </p>
+      <label for="note">Evidence to inspect</label
+      ><textarea
+        id="note"
+        maxlength="10000"
+        placeholder="A construction company is exploring safety training…"
+      ></textarea>
+      <div class="actions"><button id="check">Check signals</button></div>
+      <p id="status" role="status">Opening saved result…</p>
+      <pre id="result"></pre>
+      <div class="footnote">
+        PURE PYTHON · ISOLATED INTERPRETER · HUMAN REVIEW REQUIRED
+      </div>
+    </main>
+    <script src="ui.js"></script>
+  </body>
+</html>

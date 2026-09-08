@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.luminary.signal-check",
+  "name": "Signal Check",
+  "version": "1.0.0",
+  "hostApi": 1,
+  "runtime": {
+    "kind": "python-wheel",
+    "entry": "signal_check:request",
+    "wheels": ["signal_check-1.0.0-py3-none-any.whl"]
+  },
+  "ui": "index.html",
+  "capabilities": ["storage"],
+  "dataSchemaVersion": 1
+}
