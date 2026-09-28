@@ -12,6 +12,7 @@ import { writeFile } from "node:fs/promises";
 import { Storage, Logs } from "../services/storage.mjs";
 import { Packages } from "../services/packages.mjs";
 import { Codex } from "../integrations/codex/index.mjs";
+import { Network } from "../services/network.mjs";
 import { Host } from "../services/host.mjs";
 import { DesktopRuntime } from "../runtimes/desktop.mjs";
 import { bounded, check, publicError } from "../services/errors.mjs";
@@ -66,6 +67,7 @@ if (!testMode && !app.requestSingleInstanceLock()) {
         packages: new Packages(storage),
         logs: new Logs(storage.root),
         codex: new Codex(),
+        network: new Network(),
         createRuntime: (options) => new DesktopRuntime({ base, ...options }),
         emit: (state) => {
           if (window && !window.isDestroyed())

@@ -33,7 +33,7 @@
       "type": "array",
       "uniqueItems": true,
       "maxItems": 2,
-      "items": { "enum": ["storage", "codex.assess"] }
+      "items": { "enum": ["storage", "network.fetch", "codex.assess"] }
     },
     "runtime": {
       "oneOf": [

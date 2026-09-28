@@ -12,7 +12,8 @@ platform-validation limits. A source bundle is not an installer certification.
 | Data                         | Concurrent writes, origin isolation, version continuity, schema mismatch refusal, cache independence          | Pass                                                        |
 | ESM native runtime           | Actual Electron renderer Worker lifecycle, storage and stop/reload                                            | Pass in controlled fixture environment                      |
 | Python                       | Actual bundled interpreter, wheel installation and structured persistent results; repeated in Electron Worker | Pass                                                        |
-| Runtime restrictions         | Node/native-file/external-network imports denied; ungranted storage and oversized output rejected             | Pass in controlled fixture environment                      |
+| Runtime restrictions         | Node/native-file/direct-network imports denied; ungranted storage and oversized output rejected              | Pass in controlled fixture environment                      |
+| Brokered public fetch         | URL policy, public IPv4 filtering, redirects, content type, size and payload-smuggling tests                  | Pass in Node sandbox; native Electron relay not rerun here   |
 | Recovery                     | Infinite-loop watchdog terminates runtime; replacement loads and saved data remains                           | Pass                                                        |
 | OS sandbox                   | Root-container tests require `--no-sandbox`; production prohibits that flag                                   | Not certified; regular-user test required                   |
 | UI visual/interaction review | Exact local preview was served; browser rejected local URL access by policy                                   | Blocked; no screenshots or recording claimed                |

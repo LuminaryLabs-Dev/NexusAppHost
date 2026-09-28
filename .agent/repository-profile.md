@@ -9,7 +9,7 @@
 - Archived: no
 - License: MIT
 - Primary language: JavaScript
-- Package version: `1.0.0`
+- Package version: `1.1.0`
 - Application ID: `dev.luminary.nexus-app-host`
 - Repository purpose: local desktop hosting for versioned Luminary application packages
 - Current documented source tree: `cf471125f1ef74f948dd6b5042d5ca3802fb9f29`
@@ -55,6 +55,7 @@ The authoritative package configuration is `/package.json`.
 
 - `/src/services/host.mjs` — package lifecycle, grants, runtime generation, and host calls.
 - `/src/services/packages.mjs` — package detection, manifest validation, GitHub retrieval, snapshots, and wheel inspection.
+- `/src/services/network.mjs` — capability-gated public HTTP(S) page broker and SSRF/size/time limits.
 - `/src/services/security.mjs` — URL, path, sender, capability, and content-security checks.
 - `/src/services/storage.mjs` — origin-bound JSON data, cache, staging, atomic writes, and logs.
 - `/src/services/contracts.mjs` — package and assessment contract validation.

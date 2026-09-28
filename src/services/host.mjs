@@ -9,6 +9,7 @@ export class Host {
     packages,
     logs,
     codex,
+    network,
     createRuntime,
     emit = () => {},
   }) {
@@ -17,6 +18,7 @@ export class Host {
       packages,
       logs,
       codex,
+      network,
       createRuntime,
       emit,
     });
@@ -228,9 +230,11 @@ export class Host {
     const pkg = this.current;
     const required = operation.startsWith("storage.")
       ? "storage"
-      : operation === "codex.assess"
-        ? "codex.assess"
-        : null;
+      : operation === "network.fetch"
+        ? "network.fetch"
+        : operation === "codex.assess"
+          ? "codex.assess"
+          : null;
     check(
       required && this.grants.has(required),
       "DENIED",
@@ -254,6 +258,15 @@ export class Host {
           "Invalid storage request.",
         );
         return await this.storage.set(pkg, payload.key, payload.value);
+      }
+      if (operation === "network.fetch") {
+        const controller = new AbortController();
+        this.controllers.add(controller);
+        try {
+          return await this.network.fetch(payload, controller.signal);
+        } finally {
+          this.controllers.delete(controller);
+        }
       }
       if (operation === "codex.assess") {
         const controller = new AbortController();

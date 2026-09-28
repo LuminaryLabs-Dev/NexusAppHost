@@ -15,8 +15,10 @@ choosing local paths.
 ESM and Python logic execute in a dedicated Worker in a separate hidden Electron
 renderer/session. The Worker has no Node environment. The session permits only
 the trusted runtime resources, the selected immutable package, and (for Python)
-the bundled interpreter files. CSP and request interception prohibit external
-network access; OS permission requests and downloads are denied. Webviews, new
+the bundled interpreter files. CSP and request interception prohibit direct
+external network access; packages granted `network.fetch` may request a
+main-process broker that performs only bounded public HTTP(S) page retrieval.
+OS permission requests and downloads are denied. Webviews, new
 windows, external navigation and redirects are blocked.
 
 Python uses a WebAssembly interpreter with a disposable virtual filesystem,
@@ -58,6 +60,16 @@ cannot replace an existing usable cache entry.
 GitHub's public API rate limit can be reached when a package has many files.
 V1 prioritizes explicit bounded retrieval over tokens or opaque authentication.
 Use a small bundled package or a local folder when rate-limited.
+
+## Brokered public network boundary
+
+`network.fetch` is capability-gated and accepts only a URL. The broker resolves
+public IPv4 addresses in the main process, pins the selected address for the
+request, revalidates every redirect, blocks private/reserved targets, credentials,
+IPv6 and nonstandard ports, limits redirects to five, enforces a 15-second
+deadline and 180,000-byte body cap, and returns only HTML/XHTML/plain text.
+Hosted code still has no sockets, arbitrary request headers, cookies or direct
+network access.
 
 ## Limits of the boundary
 

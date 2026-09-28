@@ -47,8 +47,9 @@ with **Local folder**. Do not enter access tokens in repository fields.
 ## Runtime and access contract
 
 - **ESM:** bundled browser-compatible modules run in a dedicated Worker inside a
-  separate Electron renderer. Node imports, native files and external network
-  access are unavailable. Use the brokered API for approved operations.
+  separate Electron renderer. Node imports, native files and direct external
+  network access are unavailable. Approved packages may request the restricted
+  `network.fetch` broker for one public HTTP(S) page request at a time.
 - **Python:** a bundled Pyodide interpreter runs pure Python in the same Worker
   boundary. Each activation installs validated wheel files into a fresh virtual
   filesystem. Native wheels, subprocesses, source builds, `.pth` hooks and
@@ -56,6 +57,10 @@ with **Local folder**. Do not enter access tokens in repository fields.
 - **Storage:** JSON keys belong to the pair of verified source origin and app ID.
   Version updates retain data. Moving a local folder creates a different source.
   Data-schema mismatches stop loading; V1 never silently migrates or deletes data.
+- **Network:** optional `network.fetch` accepts only a URL and performs a bounded
+  public HTTP(S) page request. Private/reserved IPv4 targets, IPv6, credentials,
+  nonstandard ports, excessive redirects, oversized responses and non-text pages
+  are rejected.
 - **Codex:** optional `codex.assess` accepts a fixed assessment schema and supplied
   evidence. It returns suggestions, never approved leads. Requires a compatible,
   authenticated **local Codex CLI** with a clean configuration. See

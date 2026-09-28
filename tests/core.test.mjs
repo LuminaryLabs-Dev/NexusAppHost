@@ -44,6 +44,13 @@ async function setup(t) {
 }
 test("manifest accepts the real ESM and Python contracts", async () => {
   assert.equal(manifest(structuredClone(example)).hostApi, 1);
+  assert.deepEqual(
+    manifest({
+      ...structuredClone(example),
+      capabilities: ["storage", "network.fetch"],
+    }).capabilities,
+    ["storage", "network.fetch"],
+  );
   assert.equal(
     manifest(
       JSON.parse(

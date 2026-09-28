@@ -152,11 +152,15 @@ function render(next) {
         title.textContent =
           capability === "storage"
             ? "Saved application data"
-            : "Codex lead assessment";
+            : capability === "network.fetch"
+              ? "Public web access"
+              : "Codex lead assessment";
         detail.textContent =
           capability === "storage"
             ? "Read and write this app’s own saved data."
-            : "Send supplied evidence to Codex using your CLI login and available usage. No automatic lead approval.";
+            : capability === "network.fetch"
+              ? "Fetch public HTTP(S) pages through the restricted host broker. Private networks, credentials and unrestricted requests remain blocked."
+              : "Send supplied evidence to Codex using your CLI login and available usage. No automatic lead approval.";
         text.append(title, detail);
         label.append(checkbox, text);
         $("capabilities").append(label);

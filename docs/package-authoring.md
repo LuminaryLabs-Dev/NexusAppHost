@@ -61,7 +61,7 @@ const saved = await nexus.storage.get("selected-tab");
 ```
 
 Runtime API: `api.storage.get(key)`, `api.storage.set(key, value)`,
-`api.progress(text)`, `api.assess(input)`. UI API: `nexus.request(method, data)`,
+`api.network.fetch(url)`, `api.progress(text)`, `api.assess(input)`. UI API: `nexus.request(method, data)`,
 `nexus.storage.get/set`, `nexus.assess(input)`. Capability errors reject promises
 with a readable message. Missing storage values return `null`.
 
@@ -83,9 +83,18 @@ Python source dependencies into your own wheel. No package-index downloads.
 
 This deliberately replaces the draft native-Python/venv proposal. It provides
 a cross-platform browser execution boundary at the cost of native Python
-extensions, OS processes and unrestricted networking. Research crawling belongs
-in the separate engine/operator workflow until a specific brokered network
-capability is designed; the host currently offers none.
+extensions, OS processes and unrestricted networking.
+
+### Brokered public-page fetch
+
+Packages that request and receive `network.fetch` may call
+`api.network.fetch(url)`. The request accepts only one HTTP(S) URL. The host
+resolves and pins a public IPv4 address, blocks local/private/reserved targets,
+embedded credentials, IPv6 and nonstandard ports, follows at most five redirects,
+uses a 15-second deadline, caps the body at 180,000 bytes and accepts only
+HTML/XHTML/plain-text responses. Packages never receive arbitrary headers,
+cookies, credentials, sockets or a general network API. This capability is for
+small public-page acquisition, not recursive crawling or authenticated browsing.
 
 ## Wire protocol
 

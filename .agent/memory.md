@@ -8,7 +8,7 @@ This file contains durable decisions and boundaries. It is not a task log.
 - It is not Reboot Research Studio.
 - It is not NexusResearchEngine.
 - It is not a lead database and does not contain the 1,000-lead research dataset.
-- The public product version recorded in the repository is `1.0.0`.
+- The public product version recorded in the repository is `1.1.0`.
 
 ## Runtime and security decisions
 
@@ -19,7 +19,8 @@ This file contains durable decisions and boundaries. It is not a task log.
 - Hosted UI runs in a sandboxed opaque-origin frame.
 - IPC must validate sender, frame, URL, operation, payload, generation, and capability.
 - Security checks must not be weakened to make an example or test pass.
-- External network, shell, Node built-ins, native files, and unrestricted OS operations are not available to hosted packages.
+- Direct external network, shell, Node built-ins, native files, and unrestricted OS operations are not available to hosted packages.
+- `network.fetch` is the only general web-fetch exception: it is capability-gated, URL-only, public HTTP(S)-only, IPv4-pinned and strictly bounded.
 - Package contents are immutable after validation and are rechecked before execution.
 - Stopped runtime generations lose access and late responses must not be accepted.
 

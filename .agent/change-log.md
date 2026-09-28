@@ -31,3 +31,15 @@ This file records agent-documentation and maintenance changes. Public release hi
 - Reason:
 - Validation performed:
 - Remaining limitations:
+
+## 2026-09-28 — Add bounded public-page broker
+
+- Added the `network.fetch` manifest capability and Worker API.
+- Added a main-process public HTTP(S) page broker with private-network, port,
+  credential, redirect, timeout, content-type and response-size restrictions.
+- Added focused broker tests and manifest coverage.
+- Updated package-authoring, architecture, README, acceptance and durable agent
+  documentation.
+- Sandbox evidence: the isolated broker test suite passed 7/7 under Node 22.16.
+- Full repository `npm run validate` and native Electron relay validation still
+  require the repository's Node 24/Electron environment.

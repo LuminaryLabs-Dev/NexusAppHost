@@ -3,6 +3,8 @@
 Keep hosted code outside the main process. Do not weaken sandbox, CSP, IPC sender,
 capability, origin, path or quota checks to make an example pass. No downloaded
 install scripts, native wheels, unrestricted network or shell capabilities.
+The brokered `network.fetch` capability must stay URL-only, public HTTP(S)-only,
+size/time bounded and unable to reach local/private network targets.
 
 Run `npm run validate` after changes. Record actual platform/runtime validation in
 `validation/acceptance.md`; distinguish fixture tests from live integrations.

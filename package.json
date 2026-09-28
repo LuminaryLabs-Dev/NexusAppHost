@@ -1,6 +1,6 @@
 {
   "name": "nexus-app-host",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "A local desktop host for versioned Luminary application packages",
   "author": "Luminary Labs",

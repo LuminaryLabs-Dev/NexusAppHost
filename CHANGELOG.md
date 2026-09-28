@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 — 2026-09-28
+
+Added the capability-gated `network.fetch` public-page broker for small trusted
+application packages such as Reboot Research Studio V0.1. The broker is URL-only,
+pins public IPv4 DNS results, revalidates redirects, blocks private/reserved
+targets, credentials, IPv6 and nonstandard ports, and enforces redirect, time,
+content-type and response-size limits. Hosted applications still have no direct
+network or socket access.
+
 ## 1.0.0 — 2026-09-08
 
 Initial source implementation: Electron host, public GitHub/local package

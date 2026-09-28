@@ -1,6 +1,6 @@
 # NexusAppHost current status
 
-Status date: 2026-09-18  
+Status date: 2026-09-28  
 Repository: `LuminaryLabs-Dev/NexusAppHost`  
 Branch: `main`
 
@@ -9,7 +9,7 @@ Branch: `main`
 - The Electron host source implementation exists on `main`.
 - The repository is public, active, non-forked, and MIT licensed.
 - `README.md`, `AGENTS.md`, `CHANGELOG.md`, technical documentation, contracts, tests, and validation records exist.
-- `CHANGELOG.md` records the `1.0.0` implementation dated 2026-09-08.
+- `CHANGELOG.md` records the `1.1.0` public-page broker addition dated 2026-09-28.
 - The repository includes an ESM package example named Field Notes.
 - The repository includes a pure-Python Pyodide package example named Signal Check.
 - Automated source, service, contract, Python, storage, security, runtime, and Codex fixture validation exists.
@@ -38,7 +38,8 @@ Branch: `main`
 - Package version and commit do not change the storage identity.
 - Data schema mismatches are rejected; V1 has no automatic migration.
 - Python execution is limited to bundled dependency-free pure wheels through Pyodide.
-- External network access, Node imports, native files, shell access, and ungranted capabilities are intentionally blocked.
+- Direct external network access, Node imports, native files, shell access, and ungranted capabilities are intentionally blocked.
+- Packages explicitly granted `network.fetch` can request bounded public HTTP(S) HTML/text pages through the main-process broker; sandbox unit tests cover policy and redirect/size/type limits, while native Electron relay validation remains open.
 - Codex assessment is advisory and never produces an approved lead.
 
 ## Documentation state
@@ -47,7 +48,7 @@ Branch: `main`
 - `AGENTS.md`: present.
 - `.agent/`: added as the agent continuity layer.
 - Upkeep sheet entry: not updated by this change.
-- Application source and runtime behavior: unchanged by this documentation pass.
+- Application source and runtime behavior: updated by the 1.1.0 broker change.
 
 ## Authoritative recovery paths
 

@@ -46,6 +46,9 @@ onmessage = async ({ data: message }) => {
           get: (key) => capability("storage.get", { key }),
           set: (key, value) => capability("storage.set", { key, value }),
         }),
+        network: Object.freeze({
+          fetch: (url) => capability("network.fetch", { url }),
+        }),
         assess: (input) => capability("codex.assess", input),
         progress: (text) =>
           send("progress", "task", { message: String(text).slice(0, 300) }),
