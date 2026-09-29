@@ -1,63 +1,51 @@
 # NexusAppHost current status
 
-Status date: 2026-09-28  
+Status date: 2026-09-29  
 Repository: `LuminaryLabs-Dev/NexusAppHost`  
-Branch: `main`
+Branch: `main`  
+Upkeep: `MNT-368`
 
 ## Current validated state
 
-- The Electron host source implementation exists on `main`.
-- The repository is public, active, non-forked, and MIT licensed.
-- `README.md`, `AGENTS.md`, `CHANGELOG.md`, technical documentation, contracts, tests, and validation records exist.
-- `CHANGELOG.md` records the `1.1.0` public-page broker addition dated 2026-09-28.
-- The repository includes an ESM package example named Field Notes.
-- The repository includes a pure-Python Pyodide package example named Signal Check.
-- Automated source, service, contract, Python, storage, security, runtime, and Codex fixture validation exists.
+- NexusAppHost `1.1.0` source exists on `main`.
+- Repository is public and MIT licensed.
+- ESM Field Notes and pure-Python Signal Check examples are included.
+- Source/service/contract/Python/storage/security/Codex fixture validation exists.
+- Native Electron fixture evidence records Electron `44.3.0`, Chrome `152.0.7977.78`, Node `24.20.0`, and Chromium OS sandbox tested = `false`.
 - Linux unpacked packaging has been produced.
-- The current repository tree inspected for this documentation pass is `cf471125f1ef74f948dd6b5042d5ca3802fb9f29`.
+- The 1.1 public-page broker has focused Node policy tests for URL, public IPv4, redirects, content type, size and payload smuggling.
+- Current documentation audit baseline is `e6f3815d834499ee57f7b1284a08c9f176412f12`.
 
 ## Current limitations and open gates
 
-- No GitHub Actions workflow is present in the repository tree.
-- GitHub Pages is not configured for this repository.
+- No GitHub Actions workflow is present in the audited repository tree.
 - No signed installer release is recorded.
-- Windows and macOS installers have not been built, installed, or tested in the recorded acceptance evidence.
-- OS sandbox certification is incomplete because the recorded root-container tests used `--no-sandbox`.
-- Visual and interaction review is blocked by the local browser access policy; no screenshot or visual-completion claim is supported.
-- Live authenticated Codex execution was unavailable; only fixtures and process-failure paths were tested.
-- The repository has zero open GitHub issues at the audited state.
-- A source bundle or Linux unpacked build is not installer or distribution certification.
+- Windows and macOS installers are not recorded as built/installed/tested in acceptance evidence.
+- Chromium OS sandbox certification is incomplete because recorded container-native tests used a no-sandbox fixture path.
+- Visual/interaction acceptance remains blocked/unverified; no screenshot/visual-completion claim is supported.
+- Live authenticated Codex execution remains unverified; fixture/process policy tests are lower-tier evidence.
+- Native Electron relay validation for the 1.1 `network.fetch` path was not rerun in the recorded broker update.
+- Linux unpacked output is build evidence, not installed-distribution acceptance.
 
 ## Runtime facts
 
-- Public GitHub packages are resolved to a full commit before package files are fetched.
-- Package files are read from Git tree/blob APIs and validated before cache promotion.
-- Hosted application code runs in a dedicated Worker and sandboxed renderer.
-- The Electron main process owns retrieval, identity, storage, permissions, lifecycle, and diagnostics.
-- Storage identity is bound to verified source origin and application ID.
-- Package version and commit do not change the storage identity.
-- Data schema mismatches are rejected; V1 has no automatic migration.
-- Python execution is limited to bundled dependency-free pure wheels through Pyodide.
-- Direct external network access, Node imports, native files, shell access, and ungranted capabilities are intentionally blocked.
-- Packages explicitly granted `network.fetch` can request bounded public HTTP(S) HTML/text pages through the main-process broker; sandbox unit tests cover policy and redirect/size/type limits, while native Electron relay validation remains open.
-- Codex assessment is advisory and never produces an approved lead.
+- Public GitHub package references resolve to a full commit before package tree/blob retrieval.
+- Package inspection validates bounded regular files and does not execute downloaded code.
+- Hosted logic runs in Worker contexts; hosted UI is isolated from main-process authority.
+- Storage identity is verified source origin + application ID; package version and Git revision do not change saved-data identity.
+- Data schema mismatch blocks access; V1 performs no silent migration.
+- Python accepts dependency-free pure `py3-none-any` wheels; native extensions, `.pth`, external dependencies and OS subprocesses are unsupported.
+- `network.fetch` is URL-only, public HTTP/S-only, IPv4-pinned, 180,000-byte, 15-second and 5-redirect bounded.
+- Codex assessment is advisory and never approves leads.
 
 ## Documentation state
 
-- Human and technical documentation: present.
+- Root human/technical docs: present.
 - `AGENTS.md`: present.
-- `.agent/`: added as the agent continuity layer.
-- Upkeep sheet entry: not updated by this change.
-- Application source and runtime behavior: updated by the 1.1.0 broker change.
-
-## Authoritative recovery paths
-
-- Read `/docs/troubleshooting.md` for known recovery procedures.
-- Read `/validation/acceptance.md` before interpreting test or release status.
-- Read `/docs/architecture.md` before changing security, IPC, runtime, storage, or package acquisition behavior.
-- Read `/docs/package-authoring.md` before changing package compatibility or manifest behavior.
-- Read `/docs/codex.md` before changing the Codex adapter or its execution policy.
+- `.agent/` standardized continuity set: completed by MNT-368.
+- Upkeep entry: registered as MNT-368.
+- Product/runtime behavior: unchanged by this documentation pass.
 
 ## Next justified action
 
-The documentation foundation is complete when the five files in `.agent/` are present on `main` and this commit is verified as documentation-only. Any runtime, packaging, platform, visual, Codex, deployment, or product change requires a separate bounded task and validation plan.
+No documentation follow-up after MNT-368 if Audit 3 is clean. Runtime, packaging, OS-sandbox, visual, live-Codex, deployment or product work requires a separate bounded authorization.
